@@ -13,27 +13,29 @@ export const getCounters = () => {
     .then(data => data.data);
 }
 
-export const addCounter = (params) => {
+export const addCounter = (title) => {
   return request
-    .post('/counter', JSON.stringify(params))
+    .post('/counter', { title })
     .then(data => data.data);
 }
 
 export const increaseCounter = (idCounter) => {
   return request
-    .post('/counter/inc', JSON.stringify({id: idCounter}))
+    .post('/counter/inc', {id: idCounter})
     .then(data => data.data);
 }
 
 export const decreaseCounter = (idCounter) => {
   return request
-    .post('/counter/dec', JSON.stringify({id: idCounter}))
+    .post('/counter/dec', {id: idCounter})
     .then(data => data.data);
 }
 
 export const removeCounter = (idCounter) => {
   return request
-    .delete('/counter/dec', JSON.stringify({id: idCounter}))
+    .delete('/counter', {
+      data: {id: idCounter}
+    })
     .then(data => data.data);
 }
 
