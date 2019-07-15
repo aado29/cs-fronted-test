@@ -98,7 +98,7 @@ export const setOrder = (type = 'title') => {
     return dispatch({
       type: SET_ORDER,
       payload: {
-        order: type,
+        orderBy: type,
         data: counters.sort(orderBy(type)),
       },
     });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdAdd } from 'react-icons/md';
 import './style.scss';
 
 class CounterAddForm extends React.Component {
@@ -26,13 +27,18 @@ class CounterAddForm extends React.Component {
     const { title } = this.state;
 
      return (
-      <form action="#" onSubmit={this.handleSubmit}>
-        <fieldset>
-          <label htmlFor="title">Titulo</label>
-          <input type="text" name="title" id="title" value={title} onChange={this.handleChange}/>
-          <button type="submit">Agregar</button>
-        </fieldset>
-      </form>
+       <div className="counter-add-form">
+          <h2 className="counter-add-form__title">Nuevo contador</h2>
+          <form action="#" class="counter-add-form__inner" onSubmit={this.handleSubmit}>
+            <div className="counter-add-form__group">
+              <label htmlFor="title">Nombre</label>
+              <input type="text" name="title" id="title" value={title} onChange={this.handleChange}/>
+            </div>
+            <button class="btn-circle" type="submit">
+              <MdAdd />
+            </button>
+          </form>
+        </div>
     );
   }
 }

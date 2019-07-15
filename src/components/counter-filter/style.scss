@@ -1,0 +1,13 @@
+.counter-filter {
+  &__inner {
+    label {
+      margin-right: 8px;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid #464646;
+      padding: 6px 0;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+.counter-item {
+  display: flex;
+  align-items: center;
+
+  &__cel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  &__label {
+
+  }
+
+  &__actions {
+    display: flex;
+  }
+
+  &__button {
+    border: none;
+    background-color: transparent;
+    margin-right: 4px;
+
+    &:last-child {
+      margin: 0;
+    }
+
+    &:last-child {
+      color: #dc3545;
+    }
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+}

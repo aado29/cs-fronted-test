@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Modal from 'simple-react-modal';
 import {
   getCounters,
   addCounter,
@@ -14,48 +15,61 @@ import './style.scss';
 class Body extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      openForm: false,
+    }
 
     this.props.dispatch(getCounters());
-
-    this.handleAddCounter = this.handleAddCounter.bind(this);
-    this.handleIncrease = this.handleIncrease.bind(this);
-    this.handleDecrease = this.handleDecrease.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
-    this.handleOrderBy = this.handleOrderBy.bind(this);
   }
 
-  handleAddCounter(title) {
+  handleAddCounter = title => {
     this.props.dispatch(addCounter(title));
+    this.handleCloseForm();
   }
 
-  handleIncrease(id) {
+  handleIncrease = id => {
     this.props.dispatch(setCounter(id, 'increase'))
   }
 
-  handleDecrease(id) {
+  handleDecrease = id => {
     this.props.dispatch(setCounter(id, 'decrease'))
   }
 
-  handleRemove(id) {
+  handleRemove = id => {
     this.props.dispatch(removeCounter(id))
   }
 
-  handleOrderBy(type = 'title') {
+  handleOrderBy = (type = 'title') => {
     this.props.dispatch(setOrder(type))
+  }
+
+  handleOpenForm = () => {
+    this.setState({'openForm': true});
+  }
+
+  handleCloseForm = () => {
+    this.setState({'openForm': false});
   }
 
   render() {
     const { counters } = this.props;
+    const { openForm } = this.state;
 
     return (
       <div className="body">
-        <CounterAddForm onSubmit={this.handleAddCounter} />
-        <CounterList
-          countersState={counters}
-          onOrder={this.handleOrderBy}
-          onDecreaseItem={this.handleDecrease}
-          onIncreaseItem={this.handleIncrease}
-          onRemoveItem={this.handleRemove} />
+        <div className="body__inner">
+          <Modal show={openForm} onClose={this.handleCloseForm} containerClassName="body__modal">
+            <CounterAddForm onSubmit={this.handleAddCounter} />
+          </Modal>
+          <CounterList
+            countersState={counters}
+            onAdd={this.handleOpenForm}
+            onOrder={this.handleOrderBy}
+            onDecreaseItem={this.handleDecrease}
+            onIncreaseItem={this.handleIncrease}
+            onRemoveItem={this.handleRemove}
+          />
+        </div>
       </div>
     );
   }
