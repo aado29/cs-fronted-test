@@ -8,6 +8,10 @@ export const ADD_COUNTER = "ADD_COUNTER";
 export const ADD_COUNTER_ERROR = "ADD_COUNTER_ERROR";
 export const ADD_COUNTER_SUCCESS = "ADD_COUNTER_SUCCESS";
 
+export const SET_COUNTER = "SET_COUNTER";
+export const SET_COUNTER_ERROR = "SET_COUNTER_ERROR";
+export const SET_COUNTER_SUCCESS = "SET_COUNTER_SUCCESS";
+
 export const REMOVE_COUNTER = "REMOVE_COUNTER";
 export const REMOVE_COUNTER_ERROR = "REMOVE_COUNTER_ERROR";
 export const REMOVE_COUNTER_SUCCESS = "REMOVE_COUNTER_SUCCESS";
@@ -41,6 +45,28 @@ export const addCounter = title => {
       }))
       .catch(err => dispatch({
         type: ADD_COUNTER_ERROR,
+        payload: err
+      }))
+  }
+}
+
+export const setCounter = (idCounter, type = 'increase') => {
+  return (dispatch, getState) => {
+    dispatch({
+      type: SET_COUNTER
+    });
+    apiService[`${type}Counter`](idCounter)
+      .then(data => dispatch({
+        type: SET_COUNTER_SUCCESS,
+        payload: getState().counters.data.map(item => {
+          if (item.id === data.id) {
+            item.count = data.count
+          }
+          return item;
+        }),
+      }))
+      .catch(err => dispatch({
+        type: SET_COUNTER_ERROR,
         payload: err
       }))
   }
