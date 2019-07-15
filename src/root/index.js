@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 import reducers from '../store/reducers';
+import Body from '../containers/body';
 import './style.scss';
 
 let store = createStore(
@@ -18,7 +19,7 @@ function Root() {
   return (
     <Provider store={store}>
       <div className="root">
-        <h1>Initial View</h1>
+        <Body />
       </div>
     </Provider>
   );
